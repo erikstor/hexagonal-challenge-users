@@ -56,8 +56,8 @@ const userRouter = express.Router();
  *           description: Error interno del servidor.
  */
 userRouter.post("/sign-in",
-    check('correo').escape().notEmpty().isEmail(),
-    check('clave').escape().notEmpty(),
+    check('correo').escape().notEmpty().isEmail().withMessage('El correo es obligatorio'),
+    check('clave').escape().notEmpty().withMessage('La clave es obligatoria'),
     userController.signIn.bind(userController));
 
 
@@ -129,15 +129,15 @@ userRouter.post("/sign-in",
  */
 userRouter.post("/sign-up",
     authValidator.verifyAdmin,
-    check('nombre').escape().notEmpty().isLength({min: 3}),
-    check('apellido').escape().notEmpty().isLength({min: 3}),
-    check('dni').escape().notEmpty().isNumeric(),
+    check('nombre').escape().notEmpty().isLength({min: 3}).withMessage('El nombre es obligatorio, debe contener minimo tres letras'),
+    check('apellido').escape().notEmpty().isLength({min: 3}).withMessage('El apellido es obligatorio, debe contener minimo tres letras'),
+    check('dni').escape().notEmpty().isNumeric().withMessage('La identificacion es obligatoria, debe ser numerica'),
     check('celular').escape().notEmpty().isString().isLength({max: 13}).custom((value) => {
 
         const characters = value.split('+')[1]
         const firstChar = value[0]
 
-        if (firstChar !== '+') {
+        if (firstChar !== '+' && !isNaN(firstChar)) {
             return false
         }
 
@@ -146,12 +146,12 @@ userRouter.post("/sign-up",
         }
 
         return true
-    }),
-    check('correo').escape().notEmpty().isEmail(),
-    check('clave').escape().notEmpty().isLength({min: 5}),
+    }).withMessage('El celular es obligatorio, debe contener maximo 13 caracteres, si es un celular debe agregar el "+"'),
+    check('correo').escape().notEmpty().isEmail().withMessage('El correo es obligatorio'),
+    check('clave').escape().notEmpty().isLength({min: 5}).withMessage('La clave es obligatorio'),
     check('type').escape().notEmpty().custom((value) => {
         return SignUpUsersTypes.hasOwnProperty(value)
-    }),
+    }).withMessage('El tipo es obligatorio'),
     userController.signUp.bind(userController)
 );
 

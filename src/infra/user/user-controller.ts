@@ -24,7 +24,7 @@ export class UserController {
         try {
             const {correo, clave} = req.body
 
-            const token = await this.auth.signIn(correo, clave)
+            const token = await this.auth.signIn(correo, clave)            
 
             res.setHeader('authorization', token)
             res.status(200).send();
@@ -61,10 +61,10 @@ export class UserController {
             res.setHeader('authorization', token)
             res.status(200).send();
         } catch (e: any) {
-            // res.status(e.httpCode || 500).send({
-            //     msg: `Ups, algo paso durante el proceso de registro`,
-            //     error: e.description || e.message || e
-            // })
+            res.status(e.httpCode || 500).send({
+                msg: `Ups, algo paso durante el proceso de registro`,
+                error: e.description || e.message || e
+            })
             next(e)
         }
 

@@ -29,7 +29,7 @@ export class Auth {
             throw new CustomError({
                 httpCode: 400,
                 description: 'Las credenciales son invalidas ' + user,
-            })
+            })            
         }
 
         const compare = await bcrypt.compare(password, user.clave!);

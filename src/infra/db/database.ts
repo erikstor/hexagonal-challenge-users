@@ -48,7 +48,7 @@ export class Database implements GetConnection {
         }).initialize()
     }
 
-    getConnectionSmallSquareDb() {
+    getConnectionSmallSquareDb(): Promise<DataSource> {
         return new DataSource({
             type: "postgres",
             host: this.host,
@@ -66,7 +66,7 @@ export class Database implements GetConnection {
                 RestauranteEmpleadoEntity,
                 RestaurantesEntity
             ],
-        })
+        }).initialize()
     }
 
 }

@@ -1,9 +1,10 @@
-import express from "express";
 import bodyParser from "body-parser";
-import {routerIndex} from "../infra/router-index";
+import express from "express";
 import swaggerJsdoc from "swagger-jsdoc";
-import {swaggerOptions} from "../swaggerOptions";
 import swaggerUI from "swagger-ui-express";
+
+import {routerIndex} from "../infra/router-index";
+import {swaggerOptions} from "../swaggerOptions";
 
 const app = express();
 

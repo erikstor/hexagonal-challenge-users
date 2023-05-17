@@ -9,15 +9,9 @@ export interface SignUp {
 }
 
 export const SignUpUsersTypes = {
-    'admin': 'Administrador',
     'prop': 'Propietario',
-    'employe': 'Empleado',
-    'client': 'Cliente'
 }
 
 export interface ISignUpUsersTypes {
-    'admin': 'Administrador',
     'prop': 'Propietario',
-    'employe': 'Empleado',
-    'client': 'Cliente'
 }

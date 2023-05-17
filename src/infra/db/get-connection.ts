@@ -1,7 +1,7 @@
 import {DataSource} from "typeorm";
 
 export interface GetConnection {
-    getConnectionSmallSquareDb(): DataSource
+    getConnectionSmallSquareDb(): Promise<DataSource>
 
     getConnectionUsersDb(): Promise<DataSource>
 }

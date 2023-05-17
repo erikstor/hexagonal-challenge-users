@@ -1,0 +1,26 @@
+version: '3'
+
+
+services:
+  users_db:
+    image: 'postgres:14.3'
+    restart: 'always'
+    ports:
+      - ${USERS_DB_PORT}:5432
+    environment:
+      POSTGRES_PASSWORD: ${USER_DB_PASSWORD}
+      POSTGRES_DB: ${USER_DB_NAME}
+    container_name: 'users_db'
+    volumes:
+      - ./users-postgres:/var/lib/postgresql/data
+  small_squar_db:
+    image: 'postgres:14.3'
+    restart: 'always'
+    ports:
+      - ${SMALL_SQUARE_DB_PASSWORD_PORT}:5432
+    environment:
+      POSTGRES_PASSWORD: ${SMALL_SQUARE_DB_PASSWORD}
+      POSTGRES_DB: ${SMALL_SQUARE_DB_NAME}
+    container_name: 'small_squar_db'
+    volumes:
+      - ./small-square-postgres:/var/lib/postgresql/data
